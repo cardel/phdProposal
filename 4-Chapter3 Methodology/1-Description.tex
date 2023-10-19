@@ -1,0 +1,36 @@
+\section{Researching methodology}
+
+\subsection{ Review of vulnerabilities in RESTful APIs}
+
+For the research review, the Snowball methodology\cite{Chaim2008}  will be used, which will start with the most recent state of the art reviews on mutation testing\cite{Papadakis2019}, testing challenges for RESTful APIs\cite{Ehsan2022}, and software security testing\cite{Golmohammadi2023}, which allow to have a compilation of different works related to this thesis. Subsequently, the most cited papers of these state of the art reviews will be identified and we will reach papers on specific vulnerabilities, this review system will allow structuring the most common vulnerabilities and the strategies that are being used for their management.
+
+Within these articles, special emphasis will be placed on works related to vulnerabilities reported by OSWAP for the year 2023, whose top 10 are grouped as follows:
+
+
+\begin{enumerate}
+    \item Broken object-level authorization: An intruder can break access to data by modifying the ID or UUID of the exchange data.
+    \item Broken authentication: Abuse of authentication tokens to obtain the identity of other users.
+    \item Unrestricted resource consumption: Abuse of resources such as bandwidth, CPU, memory and space.
+    \item Broken authorization at the role level: Lack of separation of groups and roles accessing a RESTful API.
+    \item Unrestricted access to sensitive business flows: Some automated functions can be exploited by intruders.
+    \item Server-side request forgery (SSRF): sending information to an unexpected destination.
+    \item Security misconfiguration: security risks related to the incorrect application of security policies in an API.
+    \item Inadequate inventory management: exposure of obsolete or insecure endpoints due to poor API management.
+    \item Insecure API consumption: cost of trust in date with any validation or verification of security policies, an attacker can impersonate a known endpoint and demand sensitive information.
+\end{enumerate}
+
+
+
+\subsection{Description of the mutation operators}
+
+Once the vulnerabilities to be worked on in this work have been identified, the mutation operators will be specified in the following steps.
+
+\begin{enumerate}
+    \item Strategy to introduce the vulnerability in the source code.
+    \item Variations of the mutation operator to produce a vulnerability effect.
+    \item Analysis of possible redundant mutants produced by the mutation operator.
+\end{enumerate}
+
+\subsection{Prototype implementation and testing}
+
+For the implementation of the prototype, a TDD methodology\cite{williams2003test} will be applied, which will allow to generate the test cases from the description of the mutation operators and thus guarantee that they will produce the desired effect in the software to be tested.

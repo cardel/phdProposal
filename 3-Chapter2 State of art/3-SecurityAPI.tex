@@ -1,0 +1,20 @@
+\section{Security in RESTful-API}
+
+ The OpenAPI Specification(OAS)\footnote{https://swagger.io/specification/, September 2023} provides an implementation-independent specification on how APIs should work; however, potential vulnerabilities have been identified, such as identifying sensitive information in data, detecting the level of risk that using RestFul-APi could pose in the transmission of sensitive information, and how to determine the level of exposure of APIs, as of 2021 were identified in the literature review on these risks that this is a challenging situation for information security\cite{Sun}.
+
+Many techniques are currently used in RestFul-API security\cite{Siriwardena2020}, including data encryption using TLS, authentication using the OAuth protocol, use of security certificates, specification of roles to restrict access to data, decentralization of APIs for different access roles, and the use of software patterns that allow access to information to be delegated to different users and facilitate control of the information exchanged.
+
+The OWASP API Security Risks is an important standard to develop applications, some works considered the implications of the creation of web applications\cite{Muhammad2021,Idris_Syarif_Winarno_2022,Cheh2021} which have found that there are problems in using proper authorization to access data, differentiating sensitive data from non-sensitive data, and in evaluating how the calls made to RESTFul APis are applied.
+
+
+The most common forms of attack\cite{Modi2022}
+ are the Structured Query Language (SQL) Injection Attack, a Man-in-the-Middle Attack (MitM), Phishing Attack, Denial of Service Attack (Dos), which can represent a risk to the information handled by the RESTFul API, some statistics indicate an increasing number of attacks to this type of applications.
+
+For this reason, some techniques have been developed\cite{Munsch2021,zenodo2023} that developers should follow to mitigate the risks related to unauthorized access to information, including the use of secure protocols such as SSL, use of hashing algorithms, application of access rules and user roles, which should be validated in the respective software tests.
+
+Therefore, organizations must consider security as a fundamental pillar in the development of this type of applications, since many vulnerabilities are not the result of attacks, but of omissions on the part of the software development team or of the tools used for its codification, taking into account that these are the most used information exchange mechanism between applications, so it is a critical component to be considered. 
+
+In recent years, different techniques have been proposed for the evaluation of security in RESTFUl APIs, including automatic black box testing\cite{Corradini2023} , automatic penetration testing\cite{Auricchio2022} , model-based\cite{EMEKA2023} and using Machine Learning\cite{Ghanem2019,Hu2020,Schwartz2019} . As can be seen, security testing aims to automate its design and execution to improve the coverage of possible vulnerabilities that have been generated in the development process or in the interaction of different components.
+
+Some challenges have been identified in the security of RESTFul APIs\cite{zhong2023}
+, including: How to handle interactions with third-party components? How to ensure good development practices, such as emergent development styles? How to apply an appropriate access configuration? How to test data access with white-box testing? The latter because black box testing is insufficient to identify vulnerabilities.
