@@ -6,20 +6,20 @@
 % Usually, the goal is to use fuzzing in order to produce test input that will detect security issues and unexpected flaws.
 
 %Background
-Today, cloud services are predominantly used through Application Programming Interfaces (APIs) that conform to the
+Today, Cloud Services are predominantly used through Application Programming Interfaces (APIs) that conform to the
 REpresentational State Transfer (REST) software architectural style --- we call such services RESTful cloud services.
 As any piece of software, cloud services also have bugs with reliability and security implications, since
 users of these cloud services are likely to share sensitive information while interacting with them.
 
-Research suggests that current security tools are not enough to uncover privacy problems and vulnerabilities in RESTful cloud services.
+Research suggests that current security tools are not enough to cover privacy problems and vulnerabilities in RESTful cloud services.
 The goal of this proposal is to investigate and evaluate whether fuzzing (a test input generation technique), and in particulare
 mutation-based fuzzing with security-aware mutations can boost testing coverage of RESTful cloud services in order to eventually
- ensure secure access to sensitive data.
+ensure the correct configuration of the security policies of these services.
 
 %methods
 Our proposal aims to study specific vulnerabilities in Flask and Django Model-View-Controler (MVC) frameworks, used in
-Python language to build RESTful cloud services, within the set of OWASP Top-10 2023 vulnerabilities, 
-and identify gaps in the effectiveness of the tests typically performed during the development of these applications.
-Then, we will investigate and try to identify specific security-aware mutations that can be used to automate testing of RESTful cloud services.
+Python language to build RESTful cloud services, within the set of OWASP Top-10 2023 vulnerabilitiesth, 
+and identify gaps in the effectiveness of the tests typically performed during the evaluation of the correct configuration of the security policies.
+Then, a testing using security-aware mutations that can be used to automate testing the security policies of RESTful API cloud services.
 
 %hypotehsis
