@@ -5,10 +5,12 @@
 \usepackage[total={6.5in, 9in}]{geometry}
 \usepackage{graphicx}
 \usepackage{longtable}
-\usepackage[sort,square, numbers]{natbib}
 \usepackage{comment}
 
-\bibliographystyle{ieeetr}
+\usepackage[backend=biber, style=ieee]{biblatex}
+\addbibresource{bibliografia/bibliografia.bib}
+\addbibresource{bibliografia/metodologia.bib}
+
 \usepackage[hidelinks]{hyperref}
 %\renewcommand\spanishtablename{Tabla}
 
@@ -46,11 +48,15 @@
 
 %%Methodology
 \input{4-Chapter3-Methodology/0-Intro}
+\input{4-Chapter3-Methodology/1-Phases}
+
 \input{4-Chapter3-Methodology/1-Description}
 \input{4-Chapter3-Methodology/2-Activities}
 
 %%Expected Results
 \input{5-ExpectedResults/1-ExpectedResults}
 
-\bibliography{bibliografia}
-\end{document}
+\printbibliography
+
+
+\end{document}  
