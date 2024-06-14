@@ -2,10 +2,9 @@
 
 \subsection{ Review of vulnerabilities in RESTful APIs} 
 
-For the research review, the Snowballing methodology\cite{Chaim2008}  will be used, which will start with the most recent state-of-the-art surveys on mutation testing\cite{Papadakis2019}, testing challenges for RESTful APIs\cite{Ehsan2022}, and software security testing\cite{Golmohammadi2023}, which allow having a compilation of different works related to this thesis. Subsequently, the most cited papers of these state-of-the-art reviews will be identified, and we will reach papers on specific vulnerabilities, this review system will allow structuring the most common vulnerabilities and the strategies that are being used for their management.
+For the research review, the Snowballing methodology\cite{Chaim2008}  will be used, which will start with the most recent state of he art surveys on mutation testing\cite{Papadakis2019}, testing challenges for RESTful APIs\cite{Ehsan2022}, and software security testing\cite{Golmohammadi2023}. These surves provide a compilation of different works related to this thesis. Subsequently, the most cited works will be identified to reach specific vulnerabilities. This review system will structure the most common vulnerabilities exploring their charcteristics and how they are handled in the software development process.
 
-Within these articles, special emphasis will be placed on works related to vulnerabilities reported by OSWAP for the year 2023, whose top 10 are grouped as follows:
-
+Special emphasis will be placed on works related to vulnerabilities reported by OWASP for 2023, whose top 10 vulnerabilities are grouped as follows:
 
 \begin{enumerate}
     \item Broken object-level authorization: An intruder can break access to data by modifying the ID or UUID of the exchange data.
@@ -35,4 +34,4 @@ The mutation operators are based on source code, the idea is to modify the confi
 
 \subsection{Prototype implementation and testing}
 
-For the implementation of the prototype, a TDD methodology\cite{williams2003test} will be applied, which will allow to generating the test cases from the description of the mutation operators and thus guarantee that they will produce the desired effect in the software to be tested.
+For the implementation of the prototype, a TDD methodology\cite{williams2003test} will be applied, which will allow generating the test cases from the description of the mutation operators and thus guarantee that they will produce the desired effect in the software to be tested.
