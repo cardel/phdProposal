@@ -6,14 +6,19 @@
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{comment}
+\usepackage{lscape}
+
 
 \usepackage[backend=biber, style=ieee]{biblatex}
 \addbibresource{bibliografia/bibliografia.bib}
 \addbibresource{bibliografia/metodologia.bib}
 
+\usepackage[table]{xcolor}
+
 \usepackage[hidelinks]{hyperref}
 %\renewcommand\spanishtablename{Tabla}
-
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii}}
 \begin{document}
 \thispagestyle{empty} %Remove page number
 \input{1-Cover/1-coverpage}
@@ -51,7 +56,7 @@
 \input{4-Chapter3-Methodology/1-Description}
 \input{4-Chapter3-Methodology/2-Phases}
 \input{4-Chapter3-Methodology/3-Activities}
-
+\input{4-Chapter3-Methodology/4-Schedule}
 %%Expected Results
 \input{5-ExpectedResults/1-ExpectedResults}
 

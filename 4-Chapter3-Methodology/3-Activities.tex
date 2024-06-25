@@ -1,28 +1,50 @@
-\section{Activities}
-
-\subsection{Phase I: Review of vulnerabilities in RESTful APIs}
+\section{Activities} \label{sec:activities}
 
 \begin{enumerate}
-    \item Review of the most recent surveys about vulnerabilities in RESTful APIs and mutation testing in APIs.
-    \item Select of the scope of the vulnerabilities to be tested
-    \item Identify elements of these selected vulnerabilities Restful APIs
-    \item Description of the these software vulnerabilities in terms of configuration of API services.
-    \item Determine the elements used in software testing for the assessment of these vulnerabilities
+  \item{\textbf{Phase I: Review of vulnerabilities in RESTful APIs}
+
+    \begin{enumerate}
+      \item Review of the most recent surveys about vulnerabilities in RESTful APIs and mutation testing in APIs according to the research questions.
+      \item Identify the objective data sources to be used in the research.
+      \item Select of the scope of the vulnerabilities to be tested.
+      \item Identify elements of these selected vulnerabilities Restful APIs.
+      \item Selection of the software vulnerabilities in terms of configuration of API services.
+      \item Analysis of the elements of the selected vulnerabilities in RESTful APIs.
+      \item Analysis of the strategies used to mitigate these vulnerabilities.
+      \item Determine the elements used in software testing for the assessment of these vulnerabilities
+  \end{enumerate}}
+
+  \item{\textbf{Phase II: Description of the mutation operators}
+
+    \begin{enumerate}
+      \item Describe how mutation is applied to introduce vulnerability.
+      \item Creation of data generation cases for introducing vulnerabilities. 
+      \item Define the types of mutation operators will introduce vulnerabilities in the configuration files.
+      \item Determine how to apply modifications to the source code to apply the mutation operator.
+      \item Describe the different scenarios to apply the mutation operators.
+      \item Identify the relevant tests elements to be evaluated.
+      \item Review the mutation operators to determine the theoretical coverage and redundancy metrics.
+      \item Modify the mutation operators to improve the coverage and redundancy metrics.
+  \end{enumerate}}
+
+  \item{ \textbf{Phase III: Prototype implementation and testing}
+
+    \begin{enumerate}
+    \item Generate test cases to verify the functionality of the mutation operators.
+    \item Study a mutation testing engine to introduce the mutation operators.
+    \item Code the mutation operators in the mutation testing engine.
+    \item Refactor the code to improve the quality and maintainability of the code.
+  \end{enumerate}}
+
+\item{ \textbf{Phase IV: Evaluation of the mutation operators}
+
+  \begin{enumerate}
+    \item Select a set of RESTful API services to evaluate the mutation operators.
+    \item Evaluate the factors of vulnerability present, complexity of the API and their relevance for the evaluation of the mutation operators.
+    \item Execute the security tests in the selected API services to review the detection of vulnerabilities.
+    \item Apply the mutation operators in the selected API services.
+    \item Analyze the coverage and redundancy metrics of the mutation testing process considering the metrics of mutation coverage, fault detection, execution time, false positive rate and mutation score.
+  \end{enumerate}}
+  \item {Write the final report of the research.}
 \end{enumerate}
 
-\subsection{Phase II: Description of the mutation operators}
-
-\begin{enumerate}
-    \item Describe how mutation is applied to introduce vulnerability.
-    \item Specify the different cases of variation of the mutation operator.
-    \item Determine how to apply modifications to the source code to apply the mutation operator.
-    \item Describe the different scenaries to apply the mutation operators.
-\end{enumerate}
-
-\subsection{Phase III: Prototype implementation and testing}
-
-\begin{enumerate}
-    \item Selected case studies on Python language frameworks.
-    \item Coding mutation operators in a mutation testing tool for Python.
-    \item Analyze coverage and redundancy metrics of applied operators.
-\end{enumerate}

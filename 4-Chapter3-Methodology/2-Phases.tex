@@ -2,9 +2,65 @@
 This project defines four phases to approach the objectives, as follows:
   \begin{enumerate}
     \item Systematic review of the literature according to \cite{Kitchenham2002}.
-    \item Design of the secure-aware mutation operators for the RESTFul API services.
-    \item Development of the secure-aware mutation operators for the RESTFul API services.
-    \item Evaluation of the secure-aware mutation operators for the RESTFul API services.
+    \item Design of the secure-aware mutation operators for the RESTFul API services using methodology proposed by Peffers\cite{Peffers2007}.
+     \item Development of the secure-aware mutation operators for the RESTFul API services with the TDD methodology.
+     \item Evaluation of the secure-aware mutation operators for the RESTFul API services according to the methodology proposed by Ahmed\cite{Ahmed2010}.
+  \end{enumerate}
+
+\subsection{Systematic review of the literature}
+
+This phase will consist of conducting a systematic review of the literature to identify existing secure-aware mutation operators for testing the security of RESTful API services. The review will follow the steps outlined below:
+
+\begin{itemize}
+  \item \textbf{Developing a research question:} A set of questions will guide the search for relevant literature:
+    \begin{enumerate}
+      \item What are the existing mutation operators for testing the security of RESTful API services?
+      \item How effective are these mutation operators in detecting security vulnerabilities in RESTful API services?
+      \item What are the limitations of current mutation operators for testing the security of RESTful API services?
+      \item What are the elements of the vulnerabilities in RESTful API services?
+      \item How are these vulnerabilities handled in the software development process?
+      \item What are the strategies used to mitigate these vulnerabilities?
+      \item What are the most common security misconfigurations in RESTful API services?
+    \end{enumerate}
+  \item \textbf{Identifying relevant databases:} We are going to use the IEEE Xplore, ACM Digital Library, and ScienceDirect databases. Additionally, second literature sources like conference proceedings and technical reports may be explored.
+  \item \textbf{Defining search terms:} Keywords and phrases related to secure-aware mutation testing, RESTful APIs, and security vulnerabilities will be used to conduct the search.
+  \item \textbf{Selection criteria:} The researching will priories the surveys, applied works and most recent publications about the research topics.
+  \item \textbf{Data extraction and analysis:} The data will help to identify useful information for the design of secure-aware mutation operators and identify trends about the vulnerabilities, it helps to identify potential gaps in existing research.
+\end{itemize}
+
+\subsection{Design of the secure-aware mutation operators}
+
+We are going to focus in the desing of secure-aware mutation operators for the RESTful API services. The design will be based on the elements of the vulnerabilities identified in the systematic review of the literature. The design will follow the steps outlined below:
+
+\begin{enumerate}
+  \item \textbf{Identification of the elements of the vulnerabilities:} The design will be based on the elements of the vulnerabilities identified in the systematic review of the literature.
+  \item \textbf{Specification of the mutation operators:} The design will specify the mutation operators that will be implemented in the next phase.
+  \item \textbf{Description of the mutation operators:} The design will describe how the mutation operators will be applied to introduce vulnerabilities in the RESTful API services.
+  \item \textbf{Determination of the elements used in software testing:} The design will determine the elements used in software testing for the assessment of the vulnerabilities.
+  \item \textbf{Analysis of the mutation operators:} The design will analyze the coverage and redundancy metrics of the mutation operators.
+  \item \textbf{Evaluation of the mutation operators:} The design will evaluate the effectiveness of the mutation operators in detecting security vulnerabilities in RESTful API services. We are going to evaluate using coverage and perfect of useful mutants.
+  \item \textbf{Refinement e iteration:} Based on the results of the evaluation, the proposed operators can be adjusted.
 \end{enumerate}
 
+\subsection{Development of the secure-aware mutation operators}
 
+In the development phase, the secure-aware mutation operators we will use the TDD methodology\cite{williams2003test} to guarantee that they will produce the desired effect in the software to be tested. The development will follow the steps outlined below:
+
+\begin{enumerate}
+  \item \textbf{Selection of the case studies:} We are going to select case studies on Python language frameworks.
+  \item \textbf{Coding the mutation operators:} We are going to code the mutation operators in a mutation testing tool for Python, some tools like MutPy and MutMut can be useful for this purpose.
+  \item \textbf{Analysis of the coverage and redundancy metrics:} We are going to analyze the coverage and redundancy metrics of the applied operators.
+  \item \textbf{Evaluation of the mutation operators:} We are going to evaluate the effectiveness of the mutation operators in detecting security vulnerabilities in RESTful API services.
+  \item \textbf{Refactor} Once the tests are passed, the code will be refactored to improve the quality and maintainability of the code.
+\end{enumerate}
+
+\subsection{Evaluation of the secure-aware mutation operators}
+
+This phase will consist of evaluating using the metrics of coverage and percentage of useful mutants. The evaluation will follow the steps outlined below:
+
+\begin{enumerate}
+  \item \textbf{Benchmark Selection:} We will select a set of RESTful APIs with some security vulnerabilities. These benchmarks can be publicly available datasets or APIs specifically designed for testing purposes.
+  \item \textbf{Mutation Operator Application:} The designed secure-aware mutation operators will be applied to each benchmark API. This will generate a set of mutant APIs for each benchmark, where each mutant represents a specific code modification introduced by the operator.
+  \item \textbf{Test Execution:} Existing security test suites or designed test cases designed to target common RESTful API vulnerabilities comparing with the original APIs and their corresponding mutants.
+  \item \textbf{Evaluation and Analysis:} Some metrics will be used (mutation coverage, fault detection rate, execution time, and false positive rate). This allows to analyze and conclude about the proposed secure-aware mutation operators in detecting vulnerabilities within RESTful APIs.
+\end{enumerate}
