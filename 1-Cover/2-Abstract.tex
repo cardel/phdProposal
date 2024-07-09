@@ -4,14 +4,23 @@
 % Usually, the goal is to use fuzzing in order to produce test input that will detect security issues and unexpected flaws.
 
 %Background
-Today, communication between applications is predominantly made through Application Programming Interfaces (APIs) that conform to the Representational State Transfer (REST) software architectural style, commonly referred to as RESTful API. As much software, they also have bugs with reliability and security implications, 
-users are likely to share sensitive information while interacting with them.
+Today, communication between web applications and services is predominantly made through Application Programming Interfaces (APIs) 
+that conform to the Representational State Transfer (REST) software architectural style, commonly referred to as RESTful API. 
+As much software, web applications and services also have bugs with reliability and security implications, 
+because users are likely to share sensitive information while interacting with them.
 
-Research suggests that current security tools are not enough to cover privacy problems and vulnerabilities in RESTful API, some of these problems are based on an unappropriated security configuration during the development process.
-The goal of this proposal is to investigate and evaluate the mutation of the security configuration though the use of security-aware mutations in RESTful API. Finally, the ultimate goal is to ensure the correct configuration of the security policies of these services through evaluation using software testing.
+Research suggests that current security tools are not sufficient to uncover privacy problems and vulnerabilities in RESTful APIs, 
+and some of the problems are based on unappropriated security configurations during the development process.
+The goal of this proposal is to investigate and evaluate the mutation of the security configurations 
+though the use of security-aware mutations in RESTful APIs. 
+Finally, the ultimate goal is to ensure the correct configuration of the security policies of web services through evaluation using software testing.
 
 
 %methods
-Our proposal aims to study specific vulnerabilities because of the security configuration files in Flask and Django Model-View-Controler (MVC) frameworks, used in Python language to build RESTful API. We will examine vulnerabilities in the context of OWASP Top-10 2023 vulnerabilities, and identify gaps in the effectiveness of the tests typically performed during software development cycle.
+Our proposal aims to study specific vulnerabilities targeted on the security configuration files of Flask and Django Model-View-Controler (MVC) frameworks,
+used in the Python language to build RESTful APIs. 
+We will examine vulnerabilities in the context of OWASP Top-10 2023 vulnerabilities, and potential identify gaps in the effectiveness of the tests typically performed 
+during the software development lifecycle.
+
 %hypothesis
-Our hypothesis is that the testing using security-aware mutations that can be used to evaluate the quality of the security configuration of RESTful API services.
+Our hypothesis is that testing using security-aware mutations can be used to evaluate and improve the quality of the security configuration of RESTful API services.
