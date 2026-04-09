@@ -1,0 +1,1035 @@
+Characterizing and understanding security risks through Security-Aware
+Mutation Testing of security configuration in RESTful APIs
+
+Carlos Andres Delgado Saavedra. Msc
+Student Code: 202004419
+carlos.andres.delgado@correounivalle.edu.co
+
+Advisers
+Jesús Alexander Aranda. PhD. Universidad del Valle,
+Gilles Perrouin. PhD. Namur University, Belgium,
+James Ortiz. PhD. Namur University, Belgium,
+
+Facultad de Ingenierı́a
+Escuela de Ingenierı́a de Sistemas y Computación
+Doctorado en Ingenierı́a: Enfasis en ciencias de la computación
+Cali, Valle del Cauca
+2024
+
+Abstract
+Today, communication between web applications and services is predominantly made through
+Application Programming Interfaces (APIs) that conform to the Representational State
+Transfer (REST) software architectural style, commonly referred to as RESTful API. As
+much software, web applications and services also have bugs with reliability and security
+implications, because users are likely to share sensitive information while interacting with
+them.
+Research suggests that current security tools are not sufficient to uncover privacy problems and vulnerabilities in RESTful APIs, and some of the problems are based on unappropriated security configurations during the development process. The goal of this proposal
+is to investigate and evaluate the mutation of the security configurations though the use of
+security-aware mutations in RESTful APIs. Finally, the ultimate goal is to ensure the correct configuration of the security policies of web services through evaluation using software
+testing.
+Our proposal aims to study specific vulnerabilities targeted on the security configuration
+files of Flask and Django Model-View-Controler (MVC) frameworks, used in the Python
+language to build RESTful APIs. We will examine vulnerabilities in the context of OWASP
+Top-10 2023 vulnerabilities, and potential identify gaps in the effectiveness of the tests
+typically performed during the software development lifecycle.
+Our hypothesis is that testing using security-aware mutations can be used to evaluate
+and improve the quality of the security configuration of RESTful API services.
+
+I
+
+Introduction
+Mutation testing is a set of practices that consists of applying mutation operators, which
+lead to the introduction of changes into the applications code in order to assess if security
+tests can detect them.
+These are useful in the security analysis of policies[1], fail models[2], and quality of
+software updates[3]. A RESTful API Cloud Service uses HTTP requests to exchange data,
+enabling operations of reading, updating, creating and deleting across data. Hence, the
+security of data exchange is an important concern in software development.
+There are some risks according OWASP foundation related to authorization, authentication, resource consumption and encryption of the data, one of the most important is
+the configuration of the security policies, because a bad configuration can open the gate to
+unauthorized access.
+Security of the exchange of data in cloud services is an enormous challenge because it
+is essential to protect the information of potential intruders. Some services are based in
+the integration between different sources of data handled through RESTFul APIs, hence
+developers must apply different security tests in development cycles to ensure the security
+polices are correct, and the information is safe.
+There are challenges related to the security of the information that is exchanged in
+the RESTFul APIs, because unknown vulnerabilities are revealed constantly because of
+situations that arise with unauthorized access to sensitive information. Software testing
+evaluates vulnerabilities, but there are limitations regarding certain situations that cannot
+be evidenced immediately, hence security-aware mutation operators can be designed that
+can provide an improvement for the detection of these through mutation testing.
+The goal of this research proposal is to extend the work of Loise Thomas, Towards
+security-aware mutation Testing [4], which designed mutation operators to test security
+policies in Java. This problem is similar to the configuration of security policies in RESTFul
+APIs, because through them it is possible to control de access and the privileges of their
+users.
+In this way, the state of the art shows that exists a limitation in the mutation operators because their design is only for a specific language or library. Thus, it reinforced the
+idea about a potential contribution of a set of security-aware mutation operators for the
+application of new strategies to test the security of the RESTFul API.
+The structure of this document is as follows: Chapter 2 presents the research problem
+and the objectives. Chapter 3 discusses the challenges in mutation testing and security in
+RESTful APIs. Chapter 4 explains the methodology used in this work. Finally, the expected
+results are described in Chapter 5.
+
+II
+
+Contents
+1 Problem and objectives
+1.1 Context . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.2 The problem . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.3 Research question . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.4 Hypothesis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.5 Objectives . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.5.1 General . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.5.2 Specific . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.6 Limitations . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+1.7 Impact of this proposal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+2
+2
+2
+3
+3
+4
+4
+4
+4
+5
+
+2 State of the art
+2.1 Mutation testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.2 Testing in RESTful API . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.3 Security in RESTful-API . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+2.4 Identified Challenges . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+6
+6
+7
+8
+9
+
+3 Methodology
+3.1 Researching methodology . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.1.1 Review of vulnerabilities in RESTful APIs . . . . . . . . . . . . . . .
+3.1.2 Description of the mutation operators . . . . . . . . . . . . . . . . . .
+3.1.3 Prototype implementation and testing . . . . . . . . . . . . . . . . .
+3.2 Phases of the project . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.2.1 Systematic review of the literature . . . . . . . . . . . . . . . . . . .
+3.2.2 Design of the security-aware mutation operators . . . . . . . . . . . .
+3.2.3 Development of the security-aware mutation operators . . . . . . . .
+3.2.4 Evaluation of the security-aware mutation operators . . . . . . . . . .
+3.3 Activities . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+3.4 Schedule . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+10
+10
+10
+11
+11
+12
+12
+13
+13
+14
+14
+15
+
+4 Expected Results
+
+17
+
+1
+
+Chapter 1
+Problem and objectives
+This chapter explains the security challenges of RESTful API Services implementations.
+It will also clearly state the problem that the research is intended to solve, identify the
+specific questions that the research will attempt to answer, state the researcher’s prediction
+about the outcome of the research, outline the specific goals of the research, acknowledge
+the limitations of the research, and discuss the potential impact of the research.
+
+1.1
+
+Context
+
+RESTful API is an architectural style for designing web services. It is based on the principle
+of using HTTP requests to access resources, making it a very flexible and scalable way to
+exchange information between systems. However, API-Restful also introduces some security
+challenges.
+One of the main challenges is the applying of security policies. These services exchange
+sensitive data, such as passwords, credit card numbers, personal information, which can be
+easily intercepted by attackers. Additionally, Restful API is often used to access resources
+that are not protected by authentication and authorization mechanisms. This vulnerability
+means that attackers can easily gain unauthorized access to sensitive data.
+To address these security challenges, modern practices include encrypting communication,
+requiring authentication to access data, implementing input validation mechanisms, and
+restricting access to the resources.
+
+1.2
+
+The problem
+
+The security of the information in RESTful APIs is a critical concern, particularly because
+some of them exchange sensitive information and private data. Mechanisms such as authorization, access policies, access restrictions and encryption are employed to protect the
+information. Therefore, developers must create mechanisms to configure and secure the
+information against unauthorized access.
+According to the open Worldwide Application Security Project (OWASP) in 2023, there
+is an increase in the security risks in the operation of RESTful API, such as, authorization
+
+2
+
+CHAPTER 1. PROBLEM AND OBJECTIVES
+
+3
+
+lacking, uncontrolled resource consumption, security misconfiguration, and unauthorized access to data. Companies need to invest significant effort in updating applications, improving
+security policies, and monitoring the exchange of data in RESTFul API. This includes using of encrypt protocols like HTTPS/TLS, implementing authorization mechanisms such
+as OAuth, monitoring activities of data exchange, applying some access restrictions like
+Cross-Origin-Resource-Sharing (CORS) and applying appropriate security policies[5].
+The literature revise shows that over the past decade, the importance of detecting and
+avoiding vulnerabilities through software testing[6] during the development cycle has grown
+significantly. This is because software testing can help identify and fix security vulnerabilities
+early in the development process, before they can be exploited by attackers. Recent research
+indicate that the risks of security of APIs are a major concern. Some critical vulnerabilities
+include broken object-level authorization, which occurs when an attacker can access resources
+breaking the authorization mechanisms; broken user authentication, where an attacker gains
+unauthorized access to a RESTful API by bypassing the authentication mechanism, and
+excessive data exposure, when too much sensitive data is exposed to the public, making it
+impossible to control effectively control access.
+Other studies about API security risks[7], injection attacks, these attacks involve injecting
+malicious code into an API. Rate limiting attacks involve sending too many requests to an
+API in a short period of time, which can overload the API and cause it to crash. Denialof-service attacks: These attacks involve flooding an API with requests, which prevents
+legitimate users from accessing the API. Developers need to be aware of these risks and take
+steps to mitigate them, some of them are related to using encrypt algorithms.
+Mutation testing is an useful tool to evaluate the capacity of the security tests to detect
+vulnerabilities and allow to study how to detect potential new vulnerabilities in the software,
+because mutation testing can be used to create new scenarios that the test suite has not
+yet encountered. By mutating the code and evaluating if the test process can detect the
+introduced vulnerabilities, mutation testing can help to identify potential new vulnerabilities
+that may not have been found by other testing methods.
+The strong potential of mutation testing lies in its to ability to detect unexpected vulnerabilities for developers, as mutation operators can simulate risks situations exploited by
+intruders. Therefore, the specification of RESTful APIs operators security-aware mutation
+operators can provide a new framework of security tests for the evaluation of the quality of
+the security tests performed by developers.
+
+1.3
+
+Research question
+
+How can security-aware mutation operators be designed to improve the coverage of security
+testing for vulnerabilities in the configuration of security policies in RESTful APIs?
+
+1.4
+
+Hypothesis
+
+Design of security-aware code mutation operators in RESTful API Services can improve the
+validation of security configuration policies.
+
+CHAPTER 1. PROBLEM AND OBJECTIVES
+
+1.5
+
+Objectives
+
+1.5.1
+
+General
+
+4
+
+Develop a collection of security-aware mutation operators designed for the evaluation of the
+configuration of security policies files within RESTful APIs.
+
+1.5.2
+
+Specific
+
+Specific objective
+1. Identification of the elements of the security
+policies in RESTful APIs
+2. Describe a set of code-based security-aware
+mutation operators for testing of security policies files in RESTful APIs
+3. Develop the set of security-aware mutation
+operators for security configuration files
+4. Evaluate the proposed security-aware mutation operators in the coverage of the security
+tests
+
+Expected result
+Characteristics of the security policies in
+RESTful API, related to exchanging of data
+Description of the mutation operators, introducing some misconfiguration security policies
+in the exchanging of data in RESTful APIs
+Description of the operators to be applied in
+security configuration files
+Report about the performance of the created
+operators against tools from the literature.
+
+Table 1.1: Specific objectives and expected results
+
+1.6
+
+Limitations
+
+This research proposal considers the next limitations:
+1. This thesis will only cover the security policies of the frameworks in 2024
+2. The focus of the thesis will be frameworks Django Rest and Flask in Python language,
+because they are highly used on different applications
+3. The mutation operators are code-based under the idea to create mutants from the
+source code
+4. The mutation operators are designed base on security unit testing
+5. The mutation operators are designed to test the security policies of applications built
+with Django Rest and Flask frameworks
+6. The scope is to test the security policies of open source applications without integration
+with other frameworks
+
+CHAPTER 1. PROBLEM AND OBJECTIVES
+
+1.7
+
+5
+
+Impact of this proposal
+
+1. The tools that will be developed in this work, it is support for the specification of
+specific mutation-aware mutation operators
+2. The security-aware mutation operators can be extended a different web programming
+languages
+3. The work will be an experience about mutation testing and security with the idea to
+design new tools for mutation testing
+
+Chapter 2
+State of the art
+This chapter will address the literature review that was conducted for this proposal, which
+includes three main questions:
+1. Q1: What are the current state of mutation testing? 2.1
+2. Q2: What are the trends in vulnerabilities in RESTful APIs? 2.2
+3. Q3: What is being explored in terms of security in RESTful APIs? 2.3
+
+2.1
+
+Mutation testing
+
+In 1972, Richar Lipson introduced the mutation testing[8] to detect fails through applying
+mutation operators, which is a specified change in the code. Afterward, Acree[9] proposed a
+method to evaluate the effectiveness of the testing tools using mutation operators, afterwards
+in 1981, Hucks[10] introduced a collection of mutation operators in COBOL. Then, Morel[11]
+created a few of strategies to create operator based on the inference of errors, which are
+difficult to observe directly. In the 80s, some authors created a set of tools, compilers and
+procedures to apply mutation testing[12], [13]. From the decade of the 90 and 2000 begins
+the creation of some mutation testing tools for modern languages [14]–[16].
+Frankl[17], [18] evaluated the effectiveness of the mutation testings considering use cases
+and data flow, introducing metrics such as covering level of the operators in the software
+components. Further research[19]–[21] built these metrics to evaluate the mutation testing
+efficacy. Additionally, Kakarlaa[22] examined vulnerabilities in the mutation operators, base
+on the size of the data and the programming language.
+In Security testing, Mouelhi[23] evaluated the adaptability of the mutation operators in
+the testing of security policies in the three layers applications. But, this analysis is empiric,
+and it is possible only observe changes in the user roles modules. Based on this work, some
+authors developed tools such as Magneto[24] an open source software to automatic evaluation
+of security vulnerabilities and the Upgrade evaluation tool[25].
+Loise[4] introduced 15 operators to the detection of the security fails in Java. These
+operators consist modifying the arguments of the functions, changing the evaluation of conditional structures, varying mathematical operations and removing control structures in user
+6
+
+CHAPTER 2. STATE OF THE ART
+
+7
+
+authentication modules and database connections. The design of the operators uses known
+vulnerabilities such as injection SQL. Loise showed that these operators can reveal some
+kinds of vulnerabilities in some open source applications. However, there is evidence of the
+missing of a security evaluation criteria in open source projects.
+In recent years, the development of tools in mutation testing has been increasing, MutAPI[26] generate mutation operators from common vulnerabilities in Java getting a precision
+of the 78% in the detection of potential security problems. A similar tool is available for
+Python[27] and specific libraries[28]. In common these tools can detect vulnerabilities, that
+are unexpected for the developers. However there are some limitations in mutation testing,
+one of them is the difference between artificial and real faults detected by mutation testing[29] this is because some of the vulnerabilities are not realistic because their occurrence
+is really low, hence it is not easy to know if they are really going to occur in a real scenario.
+Other limitation is the selection of the mutation strategies, because it is highly possible to
+have a huge set of equivalent mutants who produces a low performance of this technique of
+testing[30].
+Some tools include artificial intelligence techniques like deep learning[31] using probabilistic methods who allows for a more consistent decision on whether a mutant is killed or
+not. Other works [32]–[34] show the effectiveness of using machine learning and deep learning
+techniques to select mutants in order to reduce redundancy and improve test coverage.
+From this preliminary revision of the state of the art, the mutation operators work only
+on specific cases, this is an evidence of the need to contribute with a formal framework for
+the generation of generic testing security mutation operators.
+
+2.2
+
+Testing in RESTful API
+
+The software tests on RESTful APIs[35] evaluate different aspects of information quality and
+security metrics. Strategies for testing include regression[36], unit tests[35], White-Box[37],
+property based[38], and others.
+To apply the tests on RESTFul API[39], the actions to be performed must be evaluated,
+including checking that the HTTP status codes are correct (e.g verifying that the response
+for forbidden access is correct), verifying that the payload is in the correct format, and
+confirming that the responses are providen in a reasonable time. Additionally, different
+scenarios such as the happy path, negative situations with correct and incorrect input and
+security in terms of data encryption, data security and the correct configuration of access
+permissions must be considered.
+Several challenges have been identified in these tests[40], among which is the generation of
+a framework to generate effective unit tests to validate the quality of this type of applications.
+Furthermore, limitations have been found corresponding to the description of how a RESTful
+API works, since there are several standards, among which are XML, JSON or OpenAPI.
+Some research aims to solve these challenges, as in the case of unit test generation[41]–[44]
+and improving the test coverage[45].
+
+CHAPTER 2. STATE OF THE ART
+
+2.3
+
+8
+
+Security in RESTful-API
+
+The OpenAPI Specification(OAS)1 provides an implementation-independent specification
+on how APIs should work. However, potential vulnerabilities have been identified, such as
+identifying sensitive information in data, detecting the level of risk that using RESTFul APIs
+could pose in the transmission of sensitive information, and determine the level of exposure
+of sensitive data. As of 2021 a literature identified these risks as significant challenges for
+information security[46].
+Many techniques are currently used in RESTFul API security[47]. These include data
+encryption with TLS, authentication with the OAuth protocol, the use of security certificates,
+specification of roles to restrict access to data, decentralization for different access roles, and
+software patterns that delegate information to different users, thereby facilitating control of
+the information exchanged.
+The OWASP API Security Risks is an important standard for developing applications.
+Several studies have considered the implications of the creation of Web applications[48]–[50]
+and have found that issues realted to proper authorization to access data, differentiating
+sensitive data from non-sensitive data, and evaluating how the calls made to RESTFul APIs
+are applied.
+The most common forms of attack[51] are the Structured Query Language (SQL) Injection Attack, a Man-in-the-Middle Attack (MitM), phishing attack, Denial of Service Attack
+(Dos). Thee types of attacks can represent a risk to the information handled by the RESTFul
+API. Statistics indicate an increasing number of attacks targeting these types of applications.
+Developers have created some techniques[52], [53] to mitigate the risks related to unauthorized access to information, including the use of secure protocols such as SSL, use of
+hashing algorithms, and application of access rules and user roles. These strategies should
+be validated in the respective software tests.
+Therefore, organizations must consider security as a fundamental pillar in the development of this type of applications Many vulnerabilities are not the result of attacks but from
+omissions by software development team or of the tools used for its coding. Considering that
+RESTful APIs are the most commonly used mechanism for information exchange between
+applications, they represent a critical component that must be prioritized.
+In recent years, different techniques have been proposed for the evaluation of security in
+RESTFul APIs, including automatic black box testing[54], automatic penetration testing[55],
+model-based[56] and using machine learning[57]–[59]. These security testing methods allow
+to automate its design and execution to improve the coverage of possible vulnerabilities
+that may have been generated during the development process or through the interaction
+of different components. Other technique is the generation of vulnerability samples using
+machine learning algorithms[60], it allows automating the process of generate test cases
+for evaluating vulnerabilities. This approaches faces challenges about the data quality to
+generate effectively vulnerability samples. In contrast, using machine learning and deep
+learning algorithms can improve the vulnerability sampling and detection accuracy.
+Some challenges have been identified in securing RESTful APIs[61], including handling interactions with third-party components, ensuring good development practices such as emerg1
+
+https://swagger.io/specification/, September 2023
+
+CHAPTER 2. STATE OF THE ART
+
+9
+
+ing development styles, applying appropriate access configurations, and testing data access
+using white-box testing. The latter is crucial because black-box testing alone is insufficient
+to identify all vulnerabilities.
+
+2.4
+
+Identified Challenges
+
+According to the literature review we identified some current challenges in the interception
+between mutation testing and security in the development of RESTful APIs.
+1. RESTful APIs handle sensitive information that needs to be protected. While software
+testing evaluates the information is managed, the constant discovery of new vulnerabilities indicates an opportunity for improvement in this area.
+2. Mutation testing has proven to be a strategy for evaluating the security of applications.
+Although significant work has been done related to specific applications in languages
+such as Java and Python, there is an opportunity to extend these efforts to the development of RESTful APIs.
+3. Security remains a significant challenge in software development. Several recent studies
+have identified security gaps in many applications, which could be studied to provide
+a framework for the development of tools for assessing data security and generating
+recommendations for improvement.
+Therefore, mutation testing is identified as a potential strategy to contribute to information security in Restful APIs by providing a framework for assessing test coverage in terms
+of vulnerabilities.
+
+Chapter 3
+Methodology
+In this chapter we will discuss the methodology of the project. We will discuss the process
+of identification of the scope vulnerabilities, the description of mutation operators and the
+creation of the tool for mutation testing. In the section 3.1 we discuss the collecting and
+analyzing of a set of vulnerabilities and describe the process of description of mutation
+operators. The section 3.2 specifies the structuration of the project in for phases: systematic
+review, design of operators, development of the tool and the evaluation of the mutation
+operators. Afterward, in the section 3.3 we describe the activities according to the researching
+methodology and the phases of the project. Finally, in the section 3.4 we present the monthly
+schedule of the project considering the phases.
+
+3.1
+3.1.1
+
+Researching methodology
+Review of vulnerabilities in RESTful APIs
+
+For the research review, the Snowballing methodology[62] will be used, which will start with
+the most recent state of he art surveys on mutation testing[63], testing challenges for RESTful APIs[40], and software security testing[35]. These surveys will provide a compilation of
+different works related to this thesis. Subsequently, the most cited works will be identified to
+reach specific vulnerabilities. This review system will structure the most common vulnerabilities exploring their characteristics and how they are handled in the software development
+process.
+Special emphasis will be placed on works related to vulnerabilities reported by OWASP
+for 2023, whose top 10 vulnerabilities are grouped as follows:
+1. Broken object-level authorization: An intruder can break access to data by modifying
+the ID or UUID of the exchange data.
+2. Broken authentication: Abuse of authentication tokens to obtain the identity of other
+users.
+3. Unrestricted resource consumption: Abuse of resources such as bandwidth, CPU, memory and space.
+10
+
+CHAPTER 3. METHODOLOGY
+
+11
+
+4. Broken authorization at the role level: Lack of separation of groups and roles accessing
+a RESTful API.
+5. Unrestricted access to sensitive business flows: Some automated functions can be exploited by intruders.
+6. Server-side request forgery (SSRF): sending information to an unexpected destination.
+7. Security misconfiguration: security risks related to the incorrect application of security
+policies in an API.
+8. Inadequate inventory management: exposure of obsolete or insecure endpoints due to
+poor API management.
+9. Insecure API consumption: cost of trust in date with any validation or verification of
+security policies, an attacker can impersonate a known endpoint and demand sensitive
+information.
+The objective is to get the elements of these vulnerabilities and identify the strategies used
+to mitigate them, which will allow us to identify the mutation operators to be implemented
+in the prototype.
+
+3.1.2
+
+Description of the mutation operators
+
+Once the vulnerabilities to be worked on in this work have been identified, the mutation
+operators will be specified in the following steps.
+1. Strategy to introduce the vulnerability in the source code.
+2. Variations of the mutation operator to produce a vulnerability effect.
+3. Analysis of possible redundant mutants produced by the mutation operator.
+The mutation operators are based on source code, the idea is to modify the configuration
+files of the RESTful API, the source code of the API, and the test cases, to introduce the
+vulnerability in the software.
+
+3.1.3
+
+Prototype implementation and testing
+
+For the implementation of the prototype, a TDD methodology[64] will be applied, which
+will allow generating the test cases from the description of the mutation operators and thus
+guarantee that they will produce the desired effect in the software to be tested.
+
+CHAPTER 3. METHODOLOGY
+
+3.2
+
+12
+
+Phases of the project
+
+This project defines four phases to approach the objectives, as follows:
+1. Systematic review of the literature according to [65].
+2. Design of the security-aware mutation operators for the RESTFul API services using
+methodology proposed by Peffers[66].
+3. Development of the security-aware mutation operators for the RESTFul API services
+with the TDD methodology.
+4. Evaluation of the security-aware mutation operators for the RESTFul API services
+according to the methodology proposed by Ahmed[67].
+
+3.2.1
+
+Systematic review of the literature
+
+This phase will consist of conducting a systematic review of the literature to identify existing
+security-aware mutation operators for testing the security of RESTful API services. The
+review will follow the steps outlined below:
+• Developing a research question: A set of questions will guide the search for relevant
+literature:
+1. What are the existing mutation operators for testing the security of RESTful API
+services?
+2. How effective are these mutation operators in detecting security vulnerabilities in
+RESTful API services?
+3. What are the limitations of current mutation operators for testing the security of
+RESTful API services?
+4. What are the elements of the vulnerabilities in RESTful API services?
+5. How are these vulnerabilities handled in the software development process?
+6. What are the strategies used to mitigate these vulnerabilities?
+7. What are the most common security misconfigurations in RESTful API services?
+• Identifying relevant databases: We are going to use the IEEE Xplore, ACM Digital Library, and ScienceDirect databases. Additionally, second literature sources like
+conference proceedings and technical reports may be explored.
+• Defining search terms: Keywords and phrases related to security-aware mutation
+testing, RESTful APIs, and security vulnerabilities will be used to conduct the search.
+• Selection criteria: The researching will priories the surveys, applied works and most
+recent publications about the research topics.
+• Data extraction and analysis: The data will help to identify useful information for
+the design of security-aware mutation operators and identify trends about the vulnerabilities, it helps to identify potential gaps in existing research.
+
+CHAPTER 3. METHODOLOGY
+
+3.2.2
+
+13
+
+Design of the security-aware mutation operators
+
+We are going to focus in the desing of security-aware mutation operators for the RESTful
+API services. The design will be based on the elements of the vulnerabilities identified in
+the systematic review of the literature. The design will follow the steps outlined below:
+1. Identification of the elements of the vulnerabilities: The design will be based on
+the elements of the vulnerabilities identified in the systematic review of the literature.
+2. Specification of the mutation operators: The design will specify the mutation
+operators that will be implemented in the next phase.
+3. Description of the mutation operators: The design will describe how the mutation
+operators will be applied to introduce vulnerabilities in the RESTful API services.
+4. Determination of the elements used in software testing: The design will determine the elements used in software testing for the assessment of the vulnerabilities.
+5. Analysis of the mutation operators: The design will analyze the coverage and
+redundancy metrics of the mutation operators.
+6. Evaluation of the mutation operators: The design will evaluate the effectiveness
+of the mutation operators in detecting security vulnerabilities in RESTful API services.
+We are going to evaluate using coverage and perfect of useful mutants.
+7. Refinement e iteration: Based on the results of the evaluation, the proposed operators can be adjusted.
+
+3.2.3
+
+Development of the security-aware mutation operators
+
+In the development phase, the security-aware mutation operators we will use the TDD
+methodology[64] to guarantee that they will produce the desired effect in the software to
+be tested. The development will follow the steps outlined below:
+1. Selection of the case studies: We are going to select case studies on Python language frameworks.
+2. Coding the mutation operators: We are going to code the mutation operators in
+a mutation testing tool for Python, some tools like MutPy and MutMut can be useful
+for this purpose.
+3. Analysis of the coverage and redundancy metrics: We are going to analyze the
+coverage and redundancy metrics of the applied operators.
+4. Evaluation of the mutation operators: We are going to evaluate the effectiveness
+of the mutation operators in detecting security vulnerabilities in RESTful API services.
+5. Refactor Once the tests are passed, the code will be refactored to improve the quality
+and maintainability of the code.
+
+CHAPTER 3. METHODOLOGY
+
+3.2.4
+
+14
+
+Evaluation of the security-aware mutation operators
+
+This phase will consist of evaluating using the metrics of coverage and percentage of useful
+mutants. The evaluation will follow the steps outlined below:
+1. Benchmark Selection: We will select a set of RESTful APIs with some security vulnerabilities. These benchmarks can be publicly available datasets or APIs specifically
+designed for testing purposes.
+2. Mutation Operator Application: The designed security-aware mutation operators
+will be applied to each benchmark API. This will generate a set of mutant APIs for
+each benchmark, where each mutant represents a specific code modification introduced
+by the operator.
+3. Test Execution: Existing security test suites or designed test cases designed to target common RESTful API vulnerabilities comparing with the original APIs and their
+corresponding mutants.
+4. Evaluation and Analysis: Some metrics will be used (mutation coverage, fault
+detection rate, execution time, and false positive rate). This allows to analyze and
+conclude about the proposed security-aware mutation operators in detecting vulnerabilities within RESTful APIs.
+
+3.3
+
+Activities
+
+1. Phase I: Review of vulnerabilities in RESTful APIs
+1.1 Review of the most recent surveys about vulnerabilities in RESTful APIs and
+mutation testing in APIs according to the research questions.
+1.2 Identify the objective data sources to be used in the research.
+1.3 Select of the scope of the vulnerabilities to be tested.
+1.4 Identify elements of these selected vulnerabilities Restful APIs.
+1.5 Selection of the software vulnerabilities in terms of configuration of API services.
+1.6 Analysis of the elements of the selected vulnerabilities in RESTful APIs.
+1.7 Analysis of the strategies used to mitigate these vulnerabilities.
+1.8 Determine the elements used in software testing for the assessment of these vulnerabilities
+2. Phase II: Description of the mutation operators
+2.1 Describe how mutation is applied to introduce vulnerability.
+2.2 Creation of data generation cases for introducing vulnerabilities.
+2.3 Define the types of mutation operators will introduce vulnerabilities in the configuration files.
+
+CHAPTER 3. METHODOLOGY
+
+15
+
+2.4 Determine how to apply modifications to the source code to apply the mutation
+operator.
+2.5 Describe the different scenarios to apply the mutation operators.
+2.6 Identify the relevant tests elements to be evaluated.
+2.7 Review the mutation operators to determine the theoretical coverage and redundancy metrics.
+2.8 Modify the mutation operators to improve the coverage and redundancy metrics.
+3. Phase III: Prototype implementation and testing
+3.1 Generate test cases to verify the functionality of the mutation operators.
+3.2 Study a mutation testing engine to introduce the mutation operators.
+3.3 Code the mutation operators in the mutation testing engine.
+3.4 Refactor the code to improve the quality and maintainability of the code.
+4. Phase IV: Evaluation of the mutation operators
+4.1 Select a set of RESTful API services to evaluate the mutation operators.
+4.2 Evaluate the factors of vulnerability present, complexity of the API and their
+relevance for the evaluation of the mutation operators.
+4.3 Execute the security tests in the selected API services to review the detection of
+vulnerabilities.
+4.4 Apply the mutation operators in the selected API services.
+4.5 Analyze the coverage and redundancy metrics of the mutation testing process
+considering the metrics of mutation coverage, fault detection, execution time,
+false positive rate and mutation score.
+5. Write the final report of the research.
+
+3.4
+
+Schedule
+
+4.1
+4.2
+4.3
+4.4
+4.5
+
+3.1
+3.2
+3.3
+3.4
+
+2.1
+2.2
+2.3
+2.4
+2.5
+2.6
+2.7
+2.8
+
+1.1
+1.2
+1.3
+1.4
+1.5
+1.6
+1.7
+1.8
+
+17
+
+16
+
+15
+
+14
+
+11
+
+10
+
+9
+
+8
+
+7
+
+6
+
+5
+Phase IV: Evaluation of the mutation operators
+
+Phase III: Prototype implementation and testing
+
+Phase II: Description of the mutation operators
+
+Phase I: Review of vulnerabilities in RESTful APIs
+
+12
+
+Month
+13
+
+Activity
+
+CHAPTER 3. METHODOLOGY
+16
+
+24
+
+23
+
+22
+
+21
+
+20
+
+19
+
+18
+
+4
+
+3
+
+2
+
+1
+
+Chapter 4
+Expected Results
+Mutation testing offers a valuable approach to assessing potential software vulnerabilities.
+In the case of RESTful APIs, it allows assessing how access to sensitive data can be managed. However, challenges arise due to issues identified in the implementation of OWASP
+recommendations during the development cycle, as well as the time-consuming nature of
+mutation testing. Therefore, it is essential to specify mutation operators that can address
+these problems while remaining feasible within the development cycle.
+The goal of this work is to specify generic mutation operators that can be applied in
+various software testing tools to analyze the quality of security in this type of data exchange
+applications.
+
+17
+
+Bibliography
+[1] T. Nelson, N. Danas, T. Giannakopoulos, and S. Krishnamurthi, “Synthesizing mutable
+configurations: Setting up systems for success,” in 2019 34th IEEE/ACM International
+Conference on Automated Software Engineering Workshop (ASEW), 2019, pp. 81–85.
+[2] M. Büchler, “Security testing with fault-models and properties,” in 2013 IEEE Sixth
+International Conference on Software Testing, Verification and Validation, 2013, pp. 501–
+502. doi: 10.1109/ICST.2013.74.
+[3] I. Kravets and D. Tsafrir, “Feasibility of mutable replay for automated regression testing of security updates,” in Runtime Environments/Systems, Layering, & Virtualized
+Environments workshop (RESoLVE), 2012.
+[4] T. Loise, X. Devroey, G. Perrouin, M. Papadakis, and P. Heymans, “Towards securityaware mutation testing,” in 2017 IEEE International Conference on Software Testing,
+Verification and Validation Workshops (ICSTW), IEEE, Mar. 2017. doi: 10.1109/
+icstw.2017.24. [Online]. Available: https://doi.org/10.1109/icstw.2017.24.
+[5] H. Riggs, S. Tufail, I. Parvez, et al., “Impact, vulnerabilities, and mitigation strategies
+for cyber-secure critical infrastructure,” Sensors, vol. 23, no. 8, p. 4060, Apr. 2023. doi:
+10.3390/s23084060. [Online]. Available: https://doi.org/10.3390/s23084060.
+[6] Y. Wang, J. Yao, and X. Yu, “Information security protection in software testing,” in
+2018 14th International Conference on Computational Intelligence and Security (CIS),
+2018, pp. 449–452.
+[7] Sattam J Alharbi and T. Moulahi, “Api security testing: The challenges of security
+testing for restful apis,” International Journal of Innovative Science and Research
+Technology, 2023. doi: 10 . 5281 / ZENODO . 7988409. [Online]. Available: https : / /
+zenodo.org/record/7988409.
+[8] R. Lipton, “Fault diagnosis of computer programs. student report,” Carnegie Mellon
+University, vol. 2, p. 2, 1971.
+[9] A. T. Acree, “On mutation,” Ph.D. dissertation, Department of Computer Science,
+USA, 1980.
+[10] J. M. Hanks, “Testing cobol programs by mutation,” Ph.D. dissertation, Georgia Institute of Technology, Atlanta, Georgia, 1980.
+[11] L. J. Morell, “A theory of error-based testing,” Ph.D. dissertation, Department of
+Computer Science, USA, 1983.
+
+18
+
+BIBLIOGRAPHY
+
+19
+
+[12] A. J. Offutt and R. A. Demillo, “Automatic test data generation,” Ph.D. dissertation,
+Department of Computer Science, USA, 1988.
+[13] A. J. Offutt and K. N. King, “A fortran 77 interpreter for mutation analysis,” in Papers
+of the Symposium on Interpreters and interpretive techniques 87, ACM Press, 1987.
+doi: 10.1145/29650.29669. [Online]. Available: https://doi.org/10.1145/29650.
+29669.
+[14] R. A. DeMilli and A. J. Offutt, “Constraint-based automatic test data generation,”
+IEEE Transactions on Software Engineering, vol. 17, no. 9, pp. 900–910, 1991.
+[15] R. A. DeMillo, E. W. Krauser, and A. P. Mathur, “Compiler-integrated program mutation,” in [1991] Proceedings The Fifteenth Annual International Computer Software
+Applications Conference, 1991, pp. 351–356.
+[16] J. C. Maldonado, M. E. Delamaro, S. C. P. F. Fabbri, et al., “Proteum: A family of tools
+to support specification and program testing based on mutation,” in Mutation Testing
+for the New Century, Springer US, 2001, pp. 113–116. doi: 10.1007/978- 1- 47575939-6_19. [Online]. Available: https://doi.org/10.1007/978-1-4757-5939-6_19.
+[17] P. G. Frankl and S. N. Weiss, “An experimental comparison of the effectiveness of the
+all-uses and all-edges adequacy criteria,” in Proceedings of the symposium on Testing,
+analysis, and verification - TAV4, ACM Press, 1991. doi: 10.1145/120807.120821.
+[Online]. Available: https://doi.org/10.1145/120807.120821.
+[18] P. Frankl and S. Weiss, “An experimental comparison of the effectiveness of branch
+testing and data flow testing,” IEEE Transactions on Software Engineering, vol. 19,
+no. 8, pp. 774–787, 1993. doi: 10 . 1109 / 32 . 238581. [Online]. Available: https :
+//doi.org/10.1109/32.238581.
+[19] A. J. Offutt, J. Pan, K. Tewary, and T. Zhang, “An experimental evaluation of data
+flow and mutation testing,” Software: Practice and Experience, vol. 26, no. 2, pp. 165–
+176, Feb. 1996. doi: 10.1002/(sici)1097- 024x(199602)26:2<165::aid- spe5>
+3 . 0 . co ; 2 - k. [Online]. Available: https : / / doi . org / 10 . 1002 / (sici ) 1097 024x(199602)26:2%3C165::aid-spe5%3E3.0.co;2-k.
+[20] P. G. Frankl, S. N. Weiss, and C. Hu, “All-uses vs mutation testing: An experimental
+comparison of effectiveness,” Journal of Systems and Software, vol. 38, no. 3, pp. 235–
+253, Sep. 1997. doi: 10.1016/s0164-1212(96)00154-9. [Online]. Available: https:
+//doi.org/10.1016/s0164-1212(96)00154-9.
+[21] P. G. Frankl and O. Iakounenko, “Further empirical studies of test effectiveness,”
+in Proceedings of the 6th ACM SIGSOFT international symposium on Foundations of
+software engineering - SIGSOFT 98/FSE-6, ACM Press, 1998. doi: 10.1145/288195.
+288298. [Online]. Available: https://doi.org/10.1145/288195.288298.
+[22] S. Kakarla, S. Momotaz, and A. S. Namin, “An evaluation of mutation and data-flow
+testing: A meta-analysis,” in 2011 IEEE Fourth International Conference on Software
+Testing, Verification and Validation Workshops, IEEE, Mar. 2011. doi: 10 . 1109 /
+icstw.2011.51. [Online]. Available: https://doi.org/10.1109/icstw.2011.51.
+
+BIBLIOGRAPHY
+
+20
+
+[23] T. Mouelhi, Y. L. Traon, and B. Baudry, “Mutation analysis for security tests qualification,” in Testing: Academic and Industrial Conference Practice and Research Techniques - MUTATION (TAICPART-MUTATION 2007), IEEE, Sep. 2007. doi: 10 .
+1109/taic.part.2007.21. [Online]. Available: https://doi.org/10.1109/taic.
+part.2007.21.
+[24] L. Thomas, W. Xu, and D. Xu, “Mutation analysis of magento for evaluating threat
+model-based security testing,” in 2011 IEEE 35th Annual Computer Software and
+Applications Conference Workshops, IEEE, Jul. 2011. doi: 10.1109/compsacw.2011.
+40. [Online]. Available: https://doi.org/10.1109/compsacw.2011.40.
+[25] O. Ozdemir, T. S. Ingec, T. Erdinc, A. Roy, and M. Durran, Upgrade verification tool,
+Mar. 2019.
+[26] M. Wen, Y. Liu, R. Wu, X. Xie, S.-C. Cheung, and Z. Su, “Exposing library API
+misuses via mutation analysis,” in 2019 IEEE/ACM 41st International Conference on
+Software Engineering (ICSE), IEEE, May 2019. doi: 10 . 1109 / icse . 2019 . 00093.
+[Online]. Available: https://doi.org/10.1109/icse.2019.00093.
+[27] Z. Zhang, H. Zhu, M. Wen, Y. Tao, Y. Liu, and Y. Xiong, “How do python framework
+APIs evolve? an exploratory study,” in 2020 IEEE 27th International Conference on
+Software Analysis, Evolution and Reengineering (SANER), IEEE, Feb. 2020. doi: 10.
+1109/saner48275.2020.9054800. [Online]. Available: https://doi.org/10.1109/
+saner48275.2020.9054800.
+[28] M. Kechagia, X. Devroey, A. Panichella, G. Gousios, and A. van Deursen, “Effective
+and efficient API misuse detection via exception propagation and search-based testing,”
+in Proceedings of the 28th ACM SIGSOFT International Symposium on Software Testing and Analysis - ISSTA 2019, ACM Press, 2019. doi: 10.1145/3293882.3330552.
+[Online]. Available: https://doi.org/10.1145/3293882.3330552.
+[29] M. Ojdanic, A. Garg, A. Khanfir, R. Degiovanni, M. Papadakis, and Y. L. Traon,
+“Syntactic versus semantic similarity of artificial and real faults in mutation testing
+studies,” IEEE Transactions on Software Engineering, vol. 49, no. 7, pp. 3922–3938,
+Jul. 2023. doi: 10.1109/tse.2023.3277564. [Online]. Available: https://doi.org/
+10.1109/tse.2023.3277564.
+[30] R. Pitts, “Mutant selection strategies in mutation testing,” in 2023 International
+Conference on Code Quality (ICCQ), IEEE, Apr. 2023. doi: 10.1109/iccq57276.
+2023.10114663. [Online]. Available: https://doi.org/10.1109/iccq57276.2023.
+10114663.
+[31] F. Tambon, F. Khomh, and G. Antoniol, “A probabilistic framework for mutation
+testing in deep neural networks,” Information and Software Technology, vol. 155,
+p. 107 129, Mar. 2023. doi: 10.1016/j.infsof.2022.107129. [Online]. Available:
+https://doi.org/10.1016/j.infsof.2022.107129.
+[32] M. R. Naeem, T. Lin, H. Naeem, F. Ullah, and S. Saeed, “Scalable mutation testing
+using predictive analysis of deep learning model,” IEEE Access, vol. 7, pp. 158 264–
+158 283, 2019. doi: 10 . 1109 / access . 2019 . 2950171. [Online]. Available: https :
+//doi.org/10.1109/access.2019.2950171.
+
+BIBLIOGRAPHY
+
+21
+
+[33] D. Mao, L. Chen, and L. Zhang, “An extensive study on cross-project predictive mutation testing,” in 2019 12th IEEE Conference on Software Testing, Validation and
+Verification (ICST), IEEE, Apr. 2019. doi: 10 . 1109 / icst . 2019 . 00025. [Online].
+Available: https://doi.org/10.1109/icst.2019.00025.
+[34] Z. Tian, J. Chen, Q. Zhu, J. Yang, and L. Zhang, “Learning to construct better mutation faults,” in Proceedings of the 37th IEEE/ACM International Conference on
+Automated Software Engineering, ACM, Oct. 2022. doi: 10.1145/3551349.3556949.
+[Online]. Available: https://doi.org/10.1145/3551349.3556949.
+[35] A. Golmohammadi, M. Zhang, and A. Arcuri, “Testing restful apis: A survey,” ACM
+Trans. Softw. Eng. Methodol., Aug. 2023, issn: 1049-331X. doi: 10.1145/3617175.
+[Online]. Available: https://doi.org/10.1145/3617175.
+[36] P. Godefroid, D. Lehmann, and M. Polishchuk, “Differential regression testing for
+REST APIs,” in Proceedings of the 29th ACM SIGSOFT International Symposium on
+Software Testing and Analysis, ACM, Jul. 2020. doi: 10 . 1145 / 3395363 . 3397374.
+[Online]. Available: https://doi.org/10.1145/3395363.3397374.
+[37] A. Arcuri, “Automated black- and white-box testing of restful apis with evomaster,”
+IEEE Software, vol. 38, no. 3, pp. 72–78, 2021. doi: 10.1109/MS.2020.3013820.
+[38] S. Karlsson, A. Čaušević, and D. Sundmark, “Quickrest: Property-based test generation of openapi-described restful apis,” in 2020 IEEE 13th International Conference on Software Testing, Validation and Verification (ICST), 2020, pp. 131–141. doi:
+10.1109/ICST46399.2020.00023.
+[39] B. De, API Testing Strategy. Apress, 2017, pp. 153–164. doi: 10.1007/978-1-48421305-6_9. [Online]. Available: https://doi.org/10.1007/978-1-4842-1305-6_9.
+[40] A. Ehsan, M. A. M. E. Abuhaliqa, C. Catal, and D. Mishra, “RESTful API testing methodologies: Rationale, challenges, and solution directions,” Applied Sciences,
+vol. 12, no. 9, p. 4369, Apr. 2022. doi: 10.3390/app12094369. [Online]. Available:
+https://doi.org/10.3390/app12094369.
+[41] A. Arcuri, “Restful api automated test case generation with evomaster,” ACM Transactions on Software Engineering and Methodology, vol. 28, no. 1, Jan. 2019, issn:
+1049-331X. doi: 10.1145/3293455. [Online]. Available: https://doi.org/10.1145/
+3293455.
+[42] S. Segura, J. A. Parejo, J. Troya, and A. Ruiz-Cortés, “Metamorphic testing of restful
+web apis,” in Proceedings of the 40th International Conference on Software Engineering, ser. ICSE ’18, Gothenburg, Sweden: Association for Computing Machinery, 2018,
+p. 882, isbn: 9781450356381. doi: 10.1145/3180155.3182528. [Online]. Available:
+https://doi.org/10.1145/3180155.3182528.
+[43] A. Arcuri, “Restful api automated test case generation,” in 2017 IEEE International
+Conference on Software Quality, Reliability and Security (QRS), 2017, pp. 9–20. doi:
+10.1109/QRS.2017.11.
+
+BIBLIOGRAPHY
+
+22
+
+[44] E. Viglianisi, M. Dallago, and M. Ceccato, “Resttestgen: Automated black-box testing
+of restful apis,” in 2020 IEEE 13th International Conference on Software Testing,
+Validation and Verification (ICST), 2020, pp. 142–152. doi: 10 . 1109 / ICST46399 .
+2020.00024.
+[45] H. Wu, L. Xu, X. Niu, and C. Nie, “Combinatorial testing of restful apis,” in Proceedings of the 44th International Conference on Software Engineering, ser. ICSE ’22,
+Pittsburgh, Pennsylvania: Association for Computing Machinery, 2022, pp. 426–437,
+isbn: 9781450392211. doi: 10.1145/3510003.3510151. [Online]. Available: https:
+//doi.org/10.1145/3510003.3510151.
+[46] R. Sun, Q. Wang, and L. Guo, “Research towards key issues of api security,” in Cyber
+Security, W. Lu, Y. Zhang, W. Wen, H. Yan, and C. Li, Eds., Singapore: Springer
+Nature Singapore, 2022, pp. 179–192, isbn: 978-981-16-9229-1.
+[47] P. Siriwardena, Advanced API Security. Apress, 2020. doi: 10.1007/978- 1- 48422050-4. [Online]. Available: https://doi.org/10.1007/978-1-4842-2050-4.
+[48] M. Idris, I. Syarif, and I. Winarno, “Development of vulnerable web application based
+on owasp api security risks,” in 2021 International Electronics Symposium (IES), 2021,
+pp. 190–194. doi: 10.1109/IES53407.2021.9593934.
+[49] M. Idris, I. Syarif, and I. Winarno, “Web application security education platform based
+on owasp api security project,” EMITTER International Journal of Engineering Technology, vol. 10, no. 2, pp. 246–261, Dec. 2022. doi: 10.24003/emitter.v10i2.705.
+[Online]. Available: https://emitter.pens.ac.id/index.php/emitter/article/
+view/705.
+[50] C. Cheh and B. Chen, “Analyzing openapi specifications for security design issues,” in
+2021 IEEE Secure Development Conference (SecDev), 2021, pp. 15–22. doi: 10.1109/
+SecDev51306.2021.00019.
+[51] B. Modi, U. Chourasia, and R. Pandey, “Design and implementation of RESTFUL
+API based model for vulnerability detection and mitigation,” IOP Conference Series:
+Materials Science and Engineering, vol. 1228, no. 1, p. 012 010, Mar. 2022. doi: 10.
+1088/1757-899x/1228/1/012010. [Online]. Available: https://doi.org/10.1088/
+1757-899x/1228/1/012010.
+[52] A. Munsch and P. Munsch, “The future of API (application programming interface)
+security: The adoption of APIs for digital communications and the implications for
+cyber security vulnerabilities,” Journal of International Technology and Information
+Management, vol. 29, no. 3, pp. 24–45, Jan. 2021. doi: 10.58729/1941-6679.1454.
+[Online]. Available: https://doi.org/10.58729/1941-6679.1454.
+[53] Sattam J Alharbi and T. Moulahi, “Api security testing: The challenges of security
+testing for restful apis,” International Journal of Innovative Research in Science Engineering and Technology, 2023. doi: 10.5281/ZENODO.7988410. [Online]. Available:
+https://zenodo.org/record/7988410.
+
+BIBLIOGRAPHY
+
+23
+
+[54] D. Corradini, M. Pasqua, and M. Ceccato, “Automated black-box testing of mass
+assignment vulnerabilities in restful apis,” in International Conference on Software
+Engineering (ICSE 2023), arXiv, 2023. doi: 10.48550/ARXIV.2301.01261. [Online].
+Available: https://arxiv.org/abs/2301.01261.
+[55] N. Auricchio, A. Cappuccio, F. Caturano, G. Perrone, and S. P. Romano, “An automated approach to web offensive security,” Computer Communications, vol. 195,
+pp. 248–261, Nov. 2022. doi: 10.1016/j.comcom.2022.08.018. [Online]. Available:
+https://doi.org/10.1016/j.comcom.2022.08.018.
+[56] B. O. EMEKA, S. HIDAKA, and S. LIU, “A practical model driven approach for
+designing security aware RESTful web APIs using SOFL,” IEICE Transactions on
+Information and Systems, vol. E106.D, no. 5, pp. 986–1000, May 2023. doi: 10.1587/
+transinf.2022edp7194. [Online]. Available: https://doi.org/10.1587/transinf.
+2022edp7194.
+[57] M. C. Ghanem and T. M. Chen, “Reinforcement learning for efficient network penetration testing,” Information, vol. 11, no. 1, p. 6, Dec. 2019. doi: 10.3390/info11010006.
+[Online]. Available: https://doi.org/10.3390/info11010006.
+[58] Z. Hu, R. Beuran, and Y. Tan, “Automated penetration testing using deep reinforcement learning,” in 2020 IEEE European Symposium on Security and Privacy Workshops, IEEE, Sep. 2020. doi: 10.1109/eurospw51379.2020.00010. [Online]. Available: https://doi.org/10.1109/eurospw51379.2020.00010.
+[59] J. Schwartz and H. Kurniawati, Autonomous penetration testing using reinforcement
+learning, 2019. doi: 10 . 48550 / ARXIV . 1905 . 05965. [Online]. Available: https : / /
+arxiv.org/abs/1905.05965.
+[60] Y. Nong, Y. Ou, M. Pradel, F. Chen, and H. Cai, “Generating realistic vulnerabilities via neural code editing: An empirical study,” Proceedings of the 30th ACM Joint
+European Software Engineering Conference and Symposium on the Foundations of Software Engineering, 2022. [Online]. Available: https://api.semanticscholar.org/
+CorpusID:253106482.
+[61] L. Zhong, A survey of prevent and detect access control vulnerabilities, 2023. doi:
+10.48550/ARXIV.2304.10600. [Online]. Available: https://arxiv.org/abs/2304.
+10600.
+[62] C. Noy, “Sampling knowledge: The hermeneutics of snowball sampling in qualitative
+research,” International Journal of Social Research Methodology, vol. 11, no. 4, pp. 327–
+344, Oct. 2008. doi: 10.1080/13645570701401305. [Online]. Available: https://doi.
+org/10.1080/13645570701401305.
+[63] M. Papadakis, M. Kintis, J. Zhang, Y. Jia, Y. L. Traon, and M. Harman, Mutation
+Testing Advances: An Analysis and Survey, 1st ed. Elsevier Inc., 2019, vol. 112, pp. 275–
+378, isbn: 9780128151211. doi: 10.1016/bs.adcom.2018.03.015. [Online]. Available:
+http://dx.doi.org/10.1016/bs.adcom.2018.03.015.
+[64] L. Williams, E. M. Maximilien, and M. Vouk, “Test-driven development as a defectreduction practice,” in 14th International Symposium on Software Reliability Engineering, 2003. ISSRE 2003., IEEE, 2003, pp. 34–45.
+
+BIBLIOGRAPHY
+
+24
+
+[65] B. A. Kitchenham, S. L. Pfleeger, L. M. Pickard, et al., “Preliminary guidelines for empirical research in software engineering,” IEEE Transactions on Software Engineering,
+vol. 28, pp. 721–734, 8 2002, issn: 00985589. doi: 10.1109/TSE.2002.1027796.
+[66] K. Peffers, T. Tuunanen, M. A. Rothenberger, and S. Chatterjee, “A design science
+research methodology for information systems research,” The Missouri Review, vol. 24,
+no. 3, pp. 45–77, 2007. doi: 10.2753/MIS0742-1222240302.
+[67] Z. Ahmed, M. Zahoor, and I. Younas, “Mutation operators for object-oriented systems:
+A survey,” Feb. 2010. doi: 10.1109/iccae.2010.5451692. [Online]. Available: http:
+//dx.doi.org/10.1109/ICCAE.2010.5451692.
+
+
